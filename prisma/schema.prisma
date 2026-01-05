@@ -1,0 +1,37 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  username String  @unique
+  password String
+  email String @unique @id 
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  tweets Tweet[]
+  likes Like[]
+}
+
+model Tweet {
+  id Int @id
+  tweet String
+  userEmail String 
+  user User @relation(fields: [userEmail], references: [email])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  likes Like[]
+}
+
+model Like{
+  created_at DateTime @default(now())
+  tweet Tweet @relation(fields: [tweetId], references: [id])
+  user User @relation(fields: [userEmail], references: [email])
+  userEmail String @id
+  tweetId Int
+}
