@@ -9,9 +9,10 @@ datasource db {
 }
 
 model User {
+  id Int @id @default(autoincrement())
   username String  @unique
   password String
-  email String @unique @id 
+  email String @unique
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   tweets Tweet[]
@@ -19,10 +20,10 @@ model User {
 }
 
 model Tweet {
-  id Int @id
+  id Int @id  @default(autoincrement())
   tweet String
-  userEmail String 
-  user User @relation(fields: [userEmail], references: [email])
+  userId Int 
+  user User @relation(fields: [userId], references: [id])
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   likes Like[]
@@ -31,7 +32,7 @@ model Tweet {
 model Like{
   created_at DateTime @default(now())
   tweet Tweet @relation(fields: [tweetId], references: [id])
-  user User @relation(fields: [userEmail], references: [email])
-  userEmail String @id
+  user User @relation(fields: [userId], references: [id])
+  userId Int @id
   tweetId Int
 }
