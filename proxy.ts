@@ -6,17 +6,17 @@ interface Routes {
 }
 
 const publicOnlyUrls: Routes = {
-  "/": true,
+  "/account": true,
   "/log-in": true,
   "/create-account": true,
 };
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const session = await getSession();
   const exists = publicOnlyUrls[request.nextUrl.pathname];
   if (!session.id) {
     if (!exists) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/account", request.url));
     }
   } else {
     if (exists) {

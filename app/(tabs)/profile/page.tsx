@@ -24,14 +24,14 @@ export default async function Profile() {
     redirect("/");
   };
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-5 p-5">
       <h1>Profile</h1>
       <div>
-        <h2>{user?.username}</h2>
-        <p>{user?.email}</p>
+        <h2>User Name : {user?.username}</h2>
+        <p>Eamil : {user?.email}</p>
       </div>
       <form action={logout}>
-        <button>Log Out</button>
+        <button className="hover:cursor-pointer">Log Out</button>
       </form>
     </div>
   );

@@ -1,10 +1,10 @@
 "use server";
 
+import db from "@/lib/db";
 import getSession from "@/lib/session";
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import z from "zod";
-import db from "../../lib/db";
 
 const checkConfirmPassword = ({
   password,
